@@ -1,0 +1,5 @@
+[[template]]
+  src = "${REMCO_TEMPLATE_DIR}/start.sh"
+  dst = "${SOULMASK_HOME}/server/start.sh"
+  make_directories = true
+  mode = "0555"
