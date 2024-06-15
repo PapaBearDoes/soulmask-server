@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d
 export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates
