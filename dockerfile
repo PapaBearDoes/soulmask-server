@@ -13,7 +13,7 @@ RUN go install github.com/HeavyHorst/remco/cmd/remco@latest
 ######################################################
 # Build Soulmask base
 ######################################################
-FROM debian:bookworm-slim AS soulmask-base
+FROM debian:bookworm AS soulmask-base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
