@@ -13,7 +13,7 @@ RUN go install github.com/HeavyHorst/remco/cmd/remco@latest
 ######################################################
 # Build Soulmask base
 ######################################################
-FROM debian:bookworm AS soulmask-base
+FROM debian:bookworm-slim AS soulmask-base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -48,7 +48,7 @@ RUN curl -Lo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/d
 RUN chmod guo+x /usr/local/bin/yq
 
 ## Update permissions
-COPY --chown=soulmask:soulmask files/entrypoint.sh ${SOULMASK_HOME}/
+COPY --chown=soulmask:soulmask ./files/entrypoint.sh ${SOULMASK_HOME}/
 
 RUN chmod ugo+x ${SOULMASK_HOME}/entrypoint.sh
 RUN chown -Rv soulmask:soulmask ${SOULMASK_HOME}/
