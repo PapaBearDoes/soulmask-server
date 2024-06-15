@@ -40,16 +40,16 @@ EOF
 cd ${SOULMASK_HOME}/server/
 steamcmd/steamcmd.sh +runscript ${SOULMASK_HOME}/server/soulmask.conf
 
-echo
+echo ""
 echo "#####################################"
-echo Generating configs...
-echo
+echo "Generating configs..."
+echo ""
 remco
 yq -n "load(\"/config/GameXishu.json\") * load(\"/config/GameXishu.json.yaml\")" -o json | tee ${SOULMASK_HOME}/server/WS/Saved/GameplaySettings/GameXishu.json
 
-echo
+echo ""
 echo "#####################################"
-echo starting server...
-echo
+echo "starting server..."
+echo ""
 
 ./start.sh
