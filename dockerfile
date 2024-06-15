@@ -41,7 +41,7 @@ RUN passwd -d soulmask
 
 ## Install remco
 COPY --from=remco /go/bin/remco /usr/local/bin/remco
-COPY --chown=soulmask:root remco /etc/remco
+COPY --chown=soulmask:root ./remco /etc/remco
 
 RUN chmod -R 0775 /etc/remco
 RUN curl -Lo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
@@ -80,7 +80,7 @@ EXPOSE 18888/tcp
 
 RUN mkdir -p /config
 
-copy --chown=soulmask:soulmask files/GameXishu.json /config/
+copy --chown=soulmask:soulmask ./files/GameXishu.json /config/
 
 USER soulmask
 
