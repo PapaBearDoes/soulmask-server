@@ -5,11 +5,10 @@ export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates
 export LD_LIBRARY_PATH=/home/soulmask/server/linux64:/home/soulmask/server/linux32:/home/soulmask/server/steamcmd/linux64:/home/soulmask/server/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 export HOME=${SOULMASK_HOME}
 
+echo ""
 echo "#####################################"
 date
-echo ""
-
-chown -Rv soulmask:soulmask ${SOULMASK_HOME}
+echo "#####################################"
 
 if [[ ! -z $SOULMASK_STEAM_VALIDATE ]]; then
   if [[ ! "$SOULMASK_STEAM_VALIDATE" =~ true|false ]]; then
@@ -22,10 +21,10 @@ if [[ ! -z $SOULMASK_STEAM_VALIDATE ]]; then
   fi
 fi
 
-## Install SteamCMD
-mkdir -p ${SOULMASK_HOME}/server/steamcmd
-curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - -C ${SOULMASK_HOME}/server/steamcmd/
-chmod ugo+x ${SOULMASK_HOME}/server/steamcmd/steamcmd.sh
+echo ""
+echo "#####################################"
+echo "Install SteamCMD"
+echo "#####################################"
 
 cat <<EOF> ${SOULMASK_HOME}/server/soulmask.conf
 @ShutdownOnFailedCommand 1
@@ -43,13 +42,14 @@ steamcmd/steamcmd.sh +runscript ${SOULMASK_HOME}/server/soulmask.conf
 echo ""
 echo "#####################################"
 echo "Generating configs..."
-echo ""
+echo "#####################################"
+
 remco
 yq -n "load(\"/config/GameXishu.json\") * load(\"/config/GameXishu.json.yaml\")" -o json | tee ${SOULMASK_HOME}/server/WS/Saved/GameplaySettings/GameXishu.json
 
 echo ""
 echo "#####################################"
 echo "starting server..."
-echo ""
+echo "#####################################"
 
 ./start.sh
