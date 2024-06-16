@@ -3,7 +3,7 @@
 export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d
 export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates
 export LD_LIBRARY_PATH=/home/soulmask/server/linux64:/home/soulmask/server/linux32:/home/soulmask/server/steamcmd/linux64:/home/soulmask/server/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-export HOME=${SOULMASK_HOME}
+#export HOME=${SOULMASK_HOME}
 
 echo ""
 echo "#####################################"
