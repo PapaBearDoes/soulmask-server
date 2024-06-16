@@ -6,6 +6,7 @@ MAXPLAYERS='{{ getv("/soulmask/maxplayers", "50") }}'
 PSW='{{ getv("/soulmask/password", "") }}'
 ADMINPSW='{{ getv("/soulmask/admin/password", "Secret123") }}'
 PVE='{% if getv("/soulmask/pve", "false")|lower == "true" %}-pve{% endif %}'
+
 echo ""
 echo "#####################################"
 echo "Servername = "${SERVERNAME}
@@ -18,4 +19,5 @@ echo "Admin Password = ********"
 echo ${PVE}
 echo "#####################################"
 echo ""
+
 ./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW="${PSW}" -adminpsw="${ADMINPSW}" ${PVE}
