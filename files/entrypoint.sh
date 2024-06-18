@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export REMCO_RESOURCE_DIR=${REMCO_HOME}/resources.d
-export REMCO_TEMPLATE_DIR=${REMCO_HOME}/templates
 export LD_LIBRARY_PATH=/home/soulmask/server/linux64:/home/soulmask/server/linux32:/home/soulmask/server/steamcmd/linux64:/home/soulmask/server/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 echo ""
@@ -9,20 +7,20 @@ echo "#####################################"
 date
 echo "#####################################"
 
-if [[ ! -z $SOULMASK_STEAM_VALIDATE ]]; then
-  if [[ ! "$SOULMASK_STEAM_VALIDATE" =~ true|false ]]; then
+if [[ ! -z ${STEAM_VALIDATE} ]]; then
+  if [[ ! "${STEAM_VALIDATE}" =~ true|false ]]; then
     echo '[ERROR] SOULMASK_STEAM_VALIDATE must be true or false'
     exit 1
-  elif [[ "$SOULMASK_STEAM_VALIDATE" == true ]]; then
-    SOULMASK_STEAM_VALIDATE_VALUE="validate"
+  elif [[ "${STEAM_VALIDATE}" == true ]]; then
+    STEAM_VALIDATE_VALUE="validate"
   else
-    SOULMASK_STEAM_VALIDATE_VALUE=""
+    STEAM_VALIDATE_VALUE=""
   fi
 fi
 
 echo ""
 echo "#####################################"
-echo "Install SteamCMD"
+echo "Install/Update SoulmaskServer"
 echo "#####################################"
 
 cat <<EOF> ${SOULMASK_HOME}/server/soulmask.conf
@@ -31,7 +29,7 @@ cat <<EOF> ${SOULMASK_HOME}/server/soulmask.conf
 @sSteamCmdForcePlatformType linux
 force_install_dir ${SOULMASK_HOME}/server/
 login anonymous
-app_update ${STEAMAPPID} ${SOULMASK_STEAM_VALIDATE_VALUE}
+app_update ${STEAMAPPID} ${STEAM_VALIDATE_VALUE}
 quit
 EOF
 
@@ -40,15 +38,33 @@ steamcmd/steamcmd.sh +runscript ${SOULMASK_HOME}/server/soulmask.conf
 
 echo ""
 echo "#####################################"
-echo "Generating configs..."
+echo "starting server..."
 echo "#####################################"
-
-remco
-yq -n "load(\"/config/GameXishu.json\") * load(\"/config/GameXishu.json.yaml\")" -o json | tee ${SOULMASK_HOME}/server/WS/Saved/GameplaySettings/GameXishu.json
+if [[ ! -z ${PVE} ]]; then
+  if [[ ! "${PVE}" =~ true|false ]]; then
+    echo '[ERROR] SOULMASK_PVE must be true or false'
+    exit 1
+  elif [[ "${PVE}" == true ]]; then
+    PVE_VALUE="-pve"
+  else
+    PVE_VALUE=""
+  fi
+fi
 
 echo ""
 echo "#####################################"
-echo "starting server..."
+echo "Servername = "${SERVERNAME}
+echo "GamePort = "${PORT}
+echo "QueryPort = "${QUERYPORT}
+echo "EchoPort = "${ECHOPORT}
+echo "MaxPlayers = "${MAXPLAYERS}
+echo "Server Password = ********"
+echo "Admin Password = ********"
+echo ${PVE_VALUE}
 echo "#####################################"
+echo "Startup Script:"
+echo "./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW=""********"" -adminpsw=""********"" "${PVE_VALUE}
+echo "#####################################"
+echo ""
 
-./start.sh
+./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW="${PSW}" -adminpsw="${ADMIN_PSW}" ${PVE_VALUE}
