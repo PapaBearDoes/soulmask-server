@@ -1,15 +1,4 @@
 ######################################################
-# Build remco from specific commit
-######################################################
-FROM golang AS remco
-
-# remco (lightweight configuration management tool) https://github.com/HeavyHorst/remco
-RUN go install github.com/HeavyHorst/remco/cmd/remco@latest
-######################################################
-# End remco from specific commit
-######################################################
-
-######################################################
 # Build Soulmask base
 ######################################################
 FROM debian:bookworm-slim AS soulmask-base
@@ -29,23 +18,12 @@ USER root
 RUN dpkg --add-architecture i386
 RUN apt -y update
 RUN apt -y upgrade
-RUN apt -y install curl nano vim ca-certificates file lib32gcc-s1 software-properties-common yq
-RUN apt-add-repository non-free
-RUN apt -y update
-RUN apt -y upgrade
+RUN apt -y --no-install-recommends install curl nano ca-certificates file lib32gcc-s1 software-properties-common
 
 ## Create soulmask user and group
 RUN groupadd -g $SOULMASK_GID soulmask
 RUN useradd -l -s /bin/bash -d $SOULMASK_HOME -m -u $SOULMASK_UID -g $SOULMASK_GID soulmask
 RUN passwd -d soulmask
-
-## Install remco
-COPY --from=remco /go/bin/remco /usr/local/bin/remco
-COPY --chown=soulmask:root remco /etc/remco
-
-RUN chmod -R 0775 /etc/remco
-RUN curl -Lo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-RUN chmod guo+x /usr/local/bin/yq
 
 ## Install SteamCMD
 RUN mkdir -p ${SOULMASK_HOME}/server/steamcmd
@@ -54,7 +32,6 @@ RUN chmod ugo+x ${SOULMASK_HOME}/server/steamcmd/steamcmd.sh
 
 ## Update permissions
 COPY --chown=soulmask:soulmask files/entrypoint.sh ${SOULMASK_HOME}/
-
 RUN chmod ugo+x ${SOULMASK_HOME}/entrypoint.sh
 RUN chown -Rv soulmask:soulmask ${SOULMASK_HOME}/
 ######################################################
@@ -71,9 +48,16 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 ENV SOULMASK_HOME=/home/soulmask
-ENV SOULMASK_STEAM_VALIDATE="false"
-ENV REMCO_HOME=/etc/remco
+ENV STEAM_VALIDATE="false"
 ENV STEAMAPPID=3017300
+ENV SERVERNAME="SoulmaskDedicatedServer"
+ENV PORT="8777"
+ENV QUERYPORT="27015"
+ENV ECHOPORT="18888"
+ENV MAXPLAYERS="50"
+ENV PSW=""
+ENV ADMIN_PSW=""
+ENV PVE="true"
 
 WORKDIR ${SOULMASK_HOME}
 VOLUME "${SOULMASK_HOME}/server"
@@ -83,10 +67,7 @@ EXPOSE 8777/udp
 EXPOSE 27015/udp
 EXPOSE 18888/tcp
 
-RUN mkdir -p /config
-
-COPY --chown=soulmask:soulmask files/GameXishu.json /config/
-RUN touch /config/GameXishu.json.yaml
+#RUN mkdir -p /config
 
 USER soulmask
 
