@@ -5,6 +5,11 @@ services:
     image: ghcr.io/papabeardoes/soulmaskserver:latest
     container_name: soulmaskserver
     restart: unless-stopped
+    mem_limit: 20G
+    deploy:
+      resources:
+        limits:
+          memory: 20G
     environment:
       SOULMASK_SERVERNAME: Server Name
       SOULMASK_STEAM_VALIDATE: false
