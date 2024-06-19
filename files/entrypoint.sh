@@ -9,13 +9,6 @@ echo "#####################################"
 
 echo ""
 echo "#####################################"
-echo "Install / Update SteamCMD"
-echo "#####################################"
-
-cp -rv /steamcmd ${HOME}/config
-
-echo ""
-echo "#####################################"
 echo "Install/Update SoulmaskServer"
 echo "#####################################"
 
@@ -30,24 +23,20 @@ if [[ ! -z ${STEAM_VALIDATE} ]]; then
   fi
 fi
 
-cd ${HOME}/config/
-
-cat <<EOF> ${HOME}/config/soulmask.conf
-@ShutdownOnFailedCommand 1
-@NoPromptForPassword 1
-@sSteamCmdForcePlatformType linux
-force_install_dir ${HOME}/config/
-login anonymous
-app_update ${STEAMAPPID} ${STEAM_VALIDATE_VALUE}
-quit
-EOF
-
-${HOME}/config/steamcmd/steamcmd.sh +runscript ${HOME}/config/soulmask.conf
+/usr/games/steamcmd \
++@ShutdownOnFailedCommand 1 \
++@NoPromptForPassword 1 \
++@sSteamCmdForcePlatformType linux \
++force_install_dir ${HOME}/config \
++login anonymous \
++app_update ${STEAMAPPID} ${STEAM_VALIDATE_VALUE} \
++quit
 
 echo ""
 echo "#####################################"
 echo "starting server..."
 echo "#####################################"
+
 if [[ ! -z ${PVE} ]]; then
   if [[ ! "${PVE}" =~ true|false ]]; then
     echo '[ERROR] SOULMASK_PVE must be true or false'
@@ -74,5 +63,7 @@ echo "Startup Script:"
 echo "./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW=""********"" -adminpsw=""********"" "${PVE_VALUE}
 echo "#####################################"
 echo ""
+
+cd ${HOME}/config/
 
 ./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW="${PSW}" -adminpsw="${ADMIN_PSW}" ${PVE_VALUE}
