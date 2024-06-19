@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 
-export LD_LIBRARY_PATH=/home/soulmask/server/linux64:/home/soulmask/server/linux32:/home/soulmask/server/steamcmd/linux64:/home/soulmask/server/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/soulmaskserver/config/linux64:/soulmaskserver/config/linux32:/soulmaskserver/config/steamcmd/linux64:/soulmaskserver/config/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 echo ""
 echo "#####################################"
 date
+echo "#####################################"
+
+echo ""
+echo "#####################################"
+echo "Install / Update SteamCMD"
+echo "#####################################"
+
+cp -rv /steamcmd ${HOME}/config
+
+echo ""
+echo "#####################################"
+echo "Install/Update SoulmaskServer"
 echo "#####################################"
 
 if [[ ! -z ${STEAM_VALIDATE} ]]; then
@@ -18,23 +30,19 @@ if [[ ! -z ${STEAM_VALIDATE} ]]; then
   fi
 fi
 
-echo ""
-echo "#####################################"
-echo "Install/Update SoulmaskServer"
-echo "#####################################"
+cd ${HOME}/config/
 
-cat <<EOF> ${SOULMASK_HOME}/server/soulmask.conf
+cat <<EOF> ${HOME}/config/soulmask.conf
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
 @sSteamCmdForcePlatformType linux
-force_install_dir ${SOULMASK_HOME}/server/
+force_install_dir ${HOME}/config/
 login anonymous
 app_update ${STEAMAPPID} ${STEAM_VALIDATE_VALUE}
 quit
 EOF
 
-cd ${SOULMASK_HOME}/server/
-steamcmd/steamcmd.sh +runscript ${SOULMASK_HOME}/server/soulmask.conf
+${HOME}/config/steamcmd/steamcmd.sh +runscript ${HOME}/config/soulmask.conf
 
 echo ""
 echo "#####################################"
