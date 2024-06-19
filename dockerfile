@@ -1,7 +1,7 @@
 ######################################################
 # Build Soulmask base
 ######################################################
-FROM debian:bookworm-slim AS soulmask
+FROM steamcmd/steamcmd:debian
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -27,22 +27,16 @@ USER root
 ## Install system packages
 RUN apt -y update
 RUN apt -y upgrade
-RUN apt -y --no-install-recommends install curl nano ca-certificates file lib32gcc-s1
+#RUN apt -y --no-install-recommends install curl nano ca-certificates file lib32gcc-s1
 RUN dpkg --add-architecture i386
 
 ##Create Directories
-RUN mkdir -p ${HOME}/config/steamcmd
-RUN mkdir -p /steamcmd
+RUN mkdir -p ${HOME}/config
 
 ## Create soulmask user and group
 RUN groupadd -g ${PGID} soulmask
 RUN useradd -l -s /bin/bash -d ${HOME} -m -u ${PUID} -g ${PGID} soulmask
 RUN passwd -d soulmask
-
-## Install SteamCMD
-RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - -C /steamcmd/
-RUN chmod ugo+x /steamcmd/steamcmd.sh
-RUN chown -Rv soulmask:soulmask /steamcmd
 
 ## Update permissions
 RUN chown -Rv ${PUID}:${PGID} ${HOME}/
