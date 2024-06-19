@@ -11,6 +11,8 @@ services:
         limits:
           memory: 20G
     environment:
+      PUID: 10000
+      PGID: 10000
       SERVERNAME: Server Name
       STEAM_VALIDATE: false
       PASSWORD: ${SOULMASK_PASSWORD}
