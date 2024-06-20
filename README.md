@@ -25,8 +25,8 @@ docker run -it --rm -d \
  -e SERVERNAME="SoulmaskServer" \
  -e STEAM_VALIDATE="false" \
  -e PVE="true" \
- -e ADMIN_PSW="On3tw0thr33f0ur%" \
- -e PSW="sumotoad" \
+ -e ADMIN_PSW="4dm1nP4ssw0rd" \
+ -e PSW="s3rv3rP4ssw0rd" \
  -e MAXPLAYERS="25" \
  -v soulmask_vol:/soulmaskserver/config \
  -p 8777/udp \
