@@ -1,5 +1,5 @@
 [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/papabeardoes/soulmask-server)](https://github.com/PapaBearDoes/soulmask-server/issues)
-[![GitHub License](https://img.shields.io/github/license/papabeardoes/soulmask-server)]
+![GitHub License](https://img.shields.io/github/license/papabeardoes/soulmask-server)]
 
 # Soulmask Server
 PapaBear's Soulmask Server (Docker)
