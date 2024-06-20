@@ -45,7 +45,7 @@ docker run -it --rm -d \
 
 ## Docker Compose
 <a name="DockerCompose"></a>
-You can use the file docker-compose.yml provided in the repository here, or simply create a file named docker-compose.yml in the directory where you wish to start the server with the below information in the file:
+You can use the file docker-compose.yml [provided here](https://github.com/PapaBearDoes/soulmaskserver/blob/main/dockerCompose/docker-compose.yml), or simply create a file named docker-compose.yml in the directory where you wish to start the server with the below information in the file:
 
 ```
 name: soulmaskserver
