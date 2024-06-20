@@ -13,7 +13,7 @@ I recommend letting Docker control the Volume settings, as all of the game modif
 # Run the server
 ## Docker
 Use this `docker run` command to launch a container with server startup options.
-Replace `<ENVIRONMENT_VARIABLE>=<VALUE>` with the appropriate values (see section "Server properties and environment variables" below).
+Replace `<ENVIRONMENT_VARIABLE>=<VALUE>` with the appropriate values (see section [Server properties and environment variables](#PropertiesVariables)).
 
 ```
 docker run -it --rm -d \
@@ -111,7 +111,8 @@ First enter into the directory where your docker-compose.yml file is located, th
 `docker compose down && docker compose pull && docker compose up -d`
 
 # Configuration
-###
+<a name="PropertiesVariables"></a>
+### Server properties and environment variables
 | Setting | Default | Notes |
 | :-----: | :-----: | :---: |
 | PUID | 10000 | The numeric userid to use in the container (leave alone unless you know what you're doing). |
