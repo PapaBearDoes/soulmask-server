@@ -11,6 +11,7 @@ This Dockerfile will download the Soulmask dedicated server app and set it up, a
 I recommend letting Docker control the Volume settings, as all of the game modification commands can be done in-game using the admin console commands.
 
 # Run the server
+<a name="DockerRun"></a>
 ## Docker
 Use this `docker run` command to launch a container with server startup options.
 Replace `<ENVIRONMENT_VARIABLE>=<VALUE>` with the appropriate values (see section [Server properties and environment variables](#PropertiesVariables)).
@@ -35,7 +36,7 @@ docker run -it --rm -d \
 ```
 
 ### Additional Docker commands
-
+<a name="DockerRunCommands"></a>
 **docker logs**
 `docker logs -f soulmaskserver`
 
@@ -43,6 +44,7 @@ docker run -it --rm -d \
 `docker exec -it soulmaskserver bash`
 
 ## Docker Compose
+<a name="DockerCompose"></a>
 You can use the file docker-compose.yml provided in the repository here, or simply create a file named docker-compose.yml in the directory where you wish to start the server with the below information in the file:
 
 ```
@@ -90,6 +92,7 @@ ADMIN_PASSWORD=4dm1nP4ssw0rd
 ```
 
 ### Docker Compose Commands
+<a name="DockerComposeCommands"></a>
 First enter into the directory where your docker-compose.yml file is located, then run the command.
 
 **Start the server using docker-compose (attached (Watch the logs))**
@@ -125,6 +128,7 @@ First enter into the directory where your docker-compose.yml file is located, th
 | PVE | false | Is the server PvE or PvP? True = PvE only |
 
 ## Faster startup, no steamCMD validation
+<a name="SteamValidation"></a>
 SteamCMD validation is disabled by default, it causes the server to take a longer time than is truly needed to boot. Soulmask already takes FOREVER to boot, so this is disabled by default.
 
 To enable SteamCMD file validation, in case you need to re-validate your container data. This can be enabled on demand by changing the environment variable `STEAM_VALIDATE` to `true`.
