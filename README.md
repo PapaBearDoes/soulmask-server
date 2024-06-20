@@ -96,21 +96,27 @@ ADMIN_PASSWORD=4dm1nP4ssw0rd
 First enter into the directory where your docker-compose.yml file is located, then run the command.
 
 **Start the server using docker-compose (attached (Watch the logs))**
+
 `docker compose up`
 
 **Start the server using docker-compose (detached (No output, runs in the background))**
+
 `docker compose up -d`
 
 **Pull a new image if one is available**
+
 `docker compose pull`
 
 **Kill the server**
+
 `docker compose down`
 
 **Update the server software within the container (restart the container detached)**
+
 `docker compose down && docker compose up -d`
 
 **Update the container, and the server software in one command**
+
 `docker compose down && docker compose pull && docker compose up -d`
 
 # Configuration
