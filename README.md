@@ -38,10 +38,14 @@ docker run -it --rm -d \
 ### Additional Docker commands
 <a name="DockerRunCommands"></a>
 **docker logs**
-`docker logs -f soulmaskserver`
+```
+docker logs -f soulmaskserver
+```
 
 **exec into the container's bash console**
-`docker exec -it soulmaskserver bash`
+```
+docker exec -it soulmaskserver bash
+```
 
 ## Docker Compose
 <a name="DockerCompose"></a>
