@@ -2,7 +2,7 @@
 ![GitHub License](https://img.shields.io/github/license/papabeardoes/soulmask-server)
 
 # Soulmask Server
-PapaBear's Docker Based Soulmask Server
+PapaBear's Soulmask Server Docker Container
 
 This uses steamCMD to automatically update your server software.
 
