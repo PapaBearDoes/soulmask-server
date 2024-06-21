@@ -1,5 +1,5 @@
 ######################################################
-# Build Soulmask base
+# Build Soulmask
 ######################################################
 FROM steamcmd/steamcmd:debian
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -27,7 +27,6 @@ USER root
 ## Install system packages
 RUN apt -y update
 RUN apt -y upgrade
-#RUN apt -y --no-install-recommends install curl nano ca-certificates file lib32gcc-s1
 RUN dpkg --add-architecture i386
 
 ##Create Directories
