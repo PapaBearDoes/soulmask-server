@@ -154,4 +154,5 @@ To enable SteamCMD file validation, in case you need to re-validate your contain
 All game settings can be accessed in-game using the admin password you set in the [Configuration Environment Variables](#PropertiesVariables) by using the in-game console:
 * Hit the "Tilde" key (`~`)
 * Type `gm key <ADMIN_PASSWORD>`
+
 All options are now settable for the server and will be saved upon container/server shutdown.
