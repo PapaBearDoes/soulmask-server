@@ -148,3 +148,10 @@ docker compose down && docker compose pull && docker compose up -d
 SteamCMD validation is disabled by default, it causes the server to take a longer time than is truly needed to boot. Soulmask already takes FOREVER to boot, so this is disabled by default.
 
 To enable SteamCMD file validation, in case you need to re-validate your container data. This can be enabled on demand by changing the environment variable `STEAM_VALIDATE` to `true`.
+
+## Game Settings
+<a name="GameSettings"></a>
+All game settings can be accessed in-game using the admin password you set in the [Configuration Environment Variables](#PropertiesVariables) by using the in-game console:
+* Hit the "Tilde" key (`~`)
+* Type `gm key <ADMIN_PASSWORD>`
+All options are now settable for the server and will be saved upon container/server shutdown.
