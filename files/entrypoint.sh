@@ -3,14 +3,14 @@
 export LD_LIBRARY_PATH=/soulmaskserver/config/linux64:/soulmaskserver/config/linux32:/soulmaskserver/config/steamcmd/linux64:/soulmaskserver/config/steamcmd/linux32:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 echo ""
-echo "#####################################"
+echo "########################################"
 date
-echo "#####################################"
+echo "########################################"
 
 echo ""
-echo "#####################################"
+echo "########################################"
 echo "Install/Update SoulmaskServer"
-echo "#####################################"
+echo "########################################"
 
 if [[ ! -z ${STEAM_VALIDATE} ]]; then
   if [[ ! "${STEAM_VALIDATE}" =~ true|false ]]; then
@@ -33,9 +33,9 @@ fi
 +quit
 
 echo ""
-echo "#####################################"
+echo "########################################"
 echo "starting server..."
-echo "#####################################"
+echo "########################################"
 
 if [[ ! -z ${PVE} ]]; then
   if [[ ! "${PVE}" =~ true|false ]]; then
@@ -49,7 +49,7 @@ if [[ ! -z ${PVE} ]]; then
 fi
 
 echo ""
-echo "#####################################"
+echo "########################################"
 echo "Servername = "${SERVERNAME}
 echo "GamePort = "${PORT}
 echo "QueryPort = "${QUERYPORT}
@@ -58,10 +58,10 @@ echo "MaxPlayers = "${MAXPLAYERS}
 echo "Server Password = ********"
 echo "Admin Password = ********"
 echo ${PVE_VALUE}
-echo "#####################################"
+echo "########################################"
 echo "Startup Script:"
 echo "./StartServer.sh -SteamServerName="${SERVERNAME}" -Port="${PORT}" -QueryPort="${QUERYPORT}" -EchoPort="${ECHOPORT}" -MaxPlayers="${MAXPLAYERS}" -PSW=""********"" -adminpsw=""********"" "${PVE_VALUE}
-echo "#####################################"
+echo "########################################"
 echo ""
 
 cd ${HOME}/config/
